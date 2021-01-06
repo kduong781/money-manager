@@ -1,4 +1,4 @@
-import { addNewUser, getUsers, getUserById, updateUser, deleteUser } from '../controllers/userControllers';
+import { addNewUser, getUsers, getUserById, updateUser, deleteUser, getUserByEmail, loginUser } from '../controllers/userControllers';
 
 const routes = (app) => {
   app.route('/users')
@@ -8,6 +8,10 @@ const routes = (app) => {
       .get(getUserById)
       .delete(deleteUser)
       .put(updateUser);
+  app.route('/user/email/:email')
+      .get(getUserByEmail);
+  app.route('/user/login')
+      .post(loginUser);
 }
 
 export default routes;

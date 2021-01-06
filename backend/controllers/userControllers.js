@@ -49,3 +49,26 @@ export const deleteUser = (req,res) => {
     res.send({message: "Sucessfully deleted user!"});
   });
 }
+
+
+export const getUserByEmail = (req,res) => {
+  User.find({"email": req.params.email}, (err, User) => {
+    if(err) {
+      res.send(err);
+    }
+    res.json(User);
+  });
+}
+
+export const loginUser = (req,res) => {
+  User.count({"email": req.body.email, "password": req.body.password}, (err, count) => {
+    if(err) {
+      res.send(err);
+    }
+    if(count > 0) {
+      res.send({status: "success"});
+    } else {
+      res.send({status: "failure"});
+    }
+  });
+}
